@@ -32,7 +32,7 @@ public class SecurityConfiguration {
                 .addFilterBefore(corsFilter(), CorsFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/api/v1/auth/**")
+                        .requestMatchers("/api/v1/auth/**","/api/v1/product/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
