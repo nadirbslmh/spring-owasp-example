@@ -1,5 +1,6 @@
 package com.example.springowaspexample.config;
 
+import com.example.springowaspexample.model.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,8 +35,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/api/v1/auth/**","/api/v1/product/**")
                         .permitAll()
+                        .requestMatchers("/api/v1/admin/**") // Add this line
+                        .hasRole(Role.ADMIN.name())
                         .anyRequest()
-                        .authenticated())
+                        .authenticated()
+                )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
